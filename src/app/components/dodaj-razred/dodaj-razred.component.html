@@ -9,14 +9,14 @@
                 <label for="skolskaGodina" class="form-label">Školska godina:</label>
                 <select id="skolskaGodina" formControlName="skolskaGodina" class="form-control"> 
                     @for(skolskaGodina of skolskeGodine; track $index) {
-                        <option [value]="skolskaGodina.id" [selected]="$index === 0">{{skolskaGodina.naziv}}</option>
+                        <option [value]="skolskaGodina.id">{{skolskaGodina.naziv}}</option>
                     }
                 </select>
 
                 <label for="razred" class="form-label">Razred:</label>
                 <select id="razred" formControlName="razred" class="form-control">
                     @for(razred of razredi; track $index) {
-                        <option [value]="razred.id" [selected]="$index === 0">{{razred.naziv}}</option>
+                        <option [value]="razred.id">{{razred.naziv}}</option>
                     }
                 </select>
             </div>
@@ -25,7 +25,7 @@
                 <label for="program" class="form-label">Naziv programa:</label>
                 <select id="program" formControlName="program" class="form-control">
                     @for(program of programi; track $index) {
-                        <option [value]="program.id" [selected]="$index === 0">{{program.naziv}}</option>
+                        <option [value]="program.id">{{program.naziv}}</option>
                     }
                 </select>
             </div>

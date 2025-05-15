@@ -1,1 +1,28 @@
-<p>pregled-odeljenje works!</p>
+<table class="table table-responsive mt-5">
+    <thead class="table-primary">
+        <tr>
+            <th>Naziv odeljenja</th>
+            <th>Odeljenski starešina</th>
+            <th>Ukupno učenika</th>
+            <th>Izdvojeno odeljenje</th>
+            <th>Jezik nastave</th>
+            <th>Lokacija</th>
+            <th>Pregled/izmena</th>
+            <th>Obriši</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(odeljenje of odeljenja; track $index) {
+            <tr>
+                <td>{{odeljenje.nazivOdeljenja}}</td>
+                <td>{{odeljenje.odeljenskiStaresina}}</td>
+                <td>{{odeljenje.ukupnoUcenika}}</td>
+                <td>{{odeljenje.izdvojenoOdeljenje}}</td>
+                <td>{{odeljenje.jezikNastave}}</td>
+                <td>{{odeljenje.lokacija}}</td>
+                <td><a [href]="'/izmeniOdeljenje?id=' + odeljenje.id" class="btn btn-sm btn-success">Izmeni</a></td>
+                <td><a class="btn btn-sm btn-danger">Obriši</a></td>
+            </tr>
+        }    
+    </tbody>
+</table>
