@@ -2,10 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Odeljenje } from '../../models/odeljenje';
 import { OdeljenjeService } from '../../services/odeljenje.service';
 import { OdeljenjeResponse } from '../../models/apiresponse';
+import { RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-pregled-odeljenje',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './pregled-odeljenje.component.html',
   styleUrl: './pregled-odeljenje.component.css'
 })

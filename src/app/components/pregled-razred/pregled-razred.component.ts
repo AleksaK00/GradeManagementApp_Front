@@ -3,10 +3,11 @@ import { Razred } from '../../models/razred';
 import { RazredService } from '../../services/razred.service';
 import { RazredResponse } from '../../models/apiresponse';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-pregled-razred',
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, RouterLink],
   templateUrl: './pregled-razred.component.html',
   styleUrl: './pregled-razred.component.css'
 })

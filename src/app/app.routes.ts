@@ -20,5 +20,13 @@ export const routes: Routes = [ {
     }, {
         path: 'dodajrazred',
         component: DodajRazredComponent
+    },
+    {
+        path: 'izmeniRazred/:id',
+        component: DodajRazredComponent
+    },
+    {
+        path: 'izmeniOdeljenje/:id',
+        component: DodajOdeljenjeComponent
     }
 ];

@@ -1,7 +1,7 @@
 <div class="row my-5">
     <div class="col-md-3">
         <select class="form-control" [(ngModel)]="filterValue">
-            <option value=""></option>
+            <option value="">Školska godina</option>
             <option value="2023/2024">2023/2024</option>
             <option value="2024/2025">2024/2025</option>
             <option value="2025/2026">2025/2026</option>
@@ -30,7 +30,7 @@
                 <td>{{razred.program}}</td>
                 <td>{{razred.brojOdeljenja}}</td>
                 <td>{{razred.ukupnoUcenika}}</td>
-                <td><a [href]="'/izmeniRazred?id=' + razred.id" class="btn btn-sm btn-success">Izmeni</a></td>
+                <td><a [routerLink]="['/izmeniRazred', razred.id]" class="btn btn-sm btn-success">Izmeni</a></td>
                 <td><a class="btn btn-sm btn-danger">Obriši</a></td>
              </tr>
             }

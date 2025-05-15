@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { RazredService } from '../../services/razred.service';
 import { SifrarnikStavka } from '../../models/sifrarnik-stavka';
 import { SifrarnikStavkaResponse } from '../../models/apiresponse';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dodaj-razred',
@@ -13,9 +14,11 @@ import { SifrarnikStavkaResponse } from '../../models/apiresponse';
 export class DodajRazredComponent implements OnInit{
 
     razredService = inject(RazredService);
+    route = inject(ActivatedRoute);
     skolskeGodine: SifrarnikStavka[] = [];
     razredi: SifrarnikStavka[] = [];
     programi: SifrarnikStavka[] = [];
+    routeID: string | null = null;
 
     //Reactive form za unos novog razreda
     dodajRazredForma: FormGroup = new FormGroup({
@@ -25,8 +28,32 @@ export class DodajRazredComponent implements OnInit{
         program: new FormControl<number>(0, Validators.required)
     });
 
-    //OnInit za hvatanje informacija za popunjavanje select elemenata i postavljanje dafult vrednosti u formi
+    //OnInit popunjava select elemente i proverava da li je postoji id u ruti, sto znaci da se forma koristi za editovanje
     ngOnInit(): void {
+        this.popuniSelectForme();
+
+        this.routeID = this.route.snapshot.paramMap.get("id");
+        if (this.routeID != null) {
+            this.dodajRazredForma.get('id')?.setValue(this.routeID);
+            this.dodajRazredForma.get('id')?.disable();
+            //pozovi API da dohvati razred sa datim id-om
+        }
+    }
+
+    //Metoda koja poziva API da doda prosledjeni razred u bazu podataka
+    dodajRazredSubmit() {
+        const formValue = this.dodajRazredForma.value;
+        
+        if (this.dodajRazredForma.get('id')?.value == null) {
+            //dodaj novi razred
+        }
+        else {
+            //Azuriraj postojeci razred sa datim id-om
+        }
+    }
+
+    //Metoda za popunjavanje select elemenata informacijama iz sifrarnika i postavljanje default vrednosti select-a
+    popuniSelectForme() {
         this.razredService.getRazredFormaInformacije().subscribe((rezultat: SifrarnikStavkaResponse) => {
             if (rezultat.response == 'ok') {
                 this.skolskeGodine = rezultat.skolskaGodina;
@@ -41,13 +68,6 @@ export class DodajRazredComponent implements OnInit{
                 alert("Server Error");
             }
         });
-    }
-
-    //Metoda koja poziva API da doda prosledjeni razred u bazu podataka
-    dodajRazredSubmit() {
-        const formValue = this.dodajRazredForma.value;
-        console.log(formValue);
-        console.log(this.razredi[0]);
     }
 
 }

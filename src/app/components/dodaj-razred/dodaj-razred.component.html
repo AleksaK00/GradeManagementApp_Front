@@ -2,9 +2,16 @@
 
 <div  class="mt-5 border border-dark rounded-3 p-3">
 
+    <!-- Reaktivna forma za unos novog razreda ili izmenu, selectovi su stavke iz sifrarnika -->
     <form [formGroup]="dodajRazredForma" (ngSubmit)="dodajRazredSubmit()">
         <div class="row">
             <div class="col-md-4">
+
+                <!-- Prikazuje se samo ako je ruta za izmenu -->
+                @if (routeID != null) {
+                    <label for="id" class="form-label">ID:</label>
+                    <input id="id" type="text" class="form-control" formControlName="id">
+                }
 
                 <label for="skolskaGodina" class="form-label">Školska godina:</label>
                 <select id="skolskaGodina" formControlName="skolskaGodina" class="form-control"> 
@@ -32,7 +39,7 @@
         </div>
 
         <div class="row justify-content-center mt-3">
-            <input type="submit" class="btn btn-lg btn-dark w-25" value="Dodaj">
+            <input type="submit" class="btn btn-lg btn-dark w-25" [value]="(routeID == null) ? 'Dodaj' : 'Izmeni'">
         </div>
     </form>
 

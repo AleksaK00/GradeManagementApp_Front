@@ -20,7 +20,7 @@
                 <td>{{odeljenje.izdvojenoOdeljenje}}</td>
                 <td>{{odeljenje.jezikNastave}}</td>
                 <td>{{odeljenje.lokacija}}</td>
-                <td><a [href]="'/izmeniOdeljenje?id=' + odeljenje.id" class="btn btn-sm btn-success">Izmeni</a></td>
+                <td><a [routerLink]="['/izmeniOdeljenje', odeljenje.id]" class="btn btn-sm btn-success">Izmeni</a></td>
                 <td><a class="btn btn-sm btn-danger">Obriši</a></td>
             </tr>
         }    
