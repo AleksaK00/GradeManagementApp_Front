@@ -28,4 +28,9 @@ export class PregledRazredComponent implements OnInit{
         });
     }
 
+    obrisiRazred(id: number) {
+        confirm('Potvrdi brisanje razreda');
+        alert('BOOM');
+    }
+
 }

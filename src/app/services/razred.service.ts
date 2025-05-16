@@ -18,4 +18,6 @@ export class RazredService {
     getAllRazredi(): Observable<RazredResponse> {
         return this.httpClient.get<RazredResponse>("https://dummyjson.com/c/9cfd-8c5d-43ea-8bb4");
     }
+
+    //za programe https://dummyjson.com/c/209c-0ef3-4ed8-aaee
 }

@@ -19,5 +19,9 @@ export interface RazredResponse extends APIresponse {
 }
 
 export interface OdeljenjeResponse extends APIresponse {
-    data: Odeljenje[];
+    data: Odeljenje[]
+}
+
+export interface StavkaSifrarnikaResponse extends APIresponse {
+    data: SifrarnikStavka[]
 }

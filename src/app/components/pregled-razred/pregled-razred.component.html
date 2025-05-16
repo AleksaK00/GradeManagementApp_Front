@@ -19,6 +19,7 @@
             <th>Ukupan broj učenika</th>
             <th>Pregled/izmena</th>
             <th>Obriši</th>
+            <th>Dodaj</th>
         </tr>
     </thead>
     <tbody>
@@ -31,7 +32,8 @@
                 <td>{{razred.brojOdeljenja}}</td>
                 <td>{{razred.ukupnoUcenika}}</td>
                 <td><a [routerLink]="['/izmeniRazred', razred.id]" class="btn btn-sm btn-success">Izmeni</a></td>
-                <td><a class="btn btn-sm btn-danger">Obriši</a></td>
+                <td><a class="btn btn-sm btn-danger" (click)="obrisiRazred(razred.id)">Obriši</a></td>
+                <td><a [routerLink]="['/dodajOdeljenje', razred.id]" class="btn btn-sm btn-info">Dodaj odeljenje</a></td>
              </tr>
             }
         }    

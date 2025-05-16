@@ -45,9 +45,11 @@ export class DodajRazredComponent implements OnInit{
         const formValue = this.dodajRazredForma.value;
         
         if (this.dodajRazredForma.get('id')?.value == null) {
+            console.log(this.dodajRazredForma.value);
             //dodaj novi razred
         }
         else {
+            console.log(this.dodajRazredForma.value);
             //Azuriraj postojeci razred sa datim id-om
         }
     }

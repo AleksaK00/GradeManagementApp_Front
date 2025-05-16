@@ -1,1 +1,65 @@
-<p>dodaj-odeljenje works!</p>
+@if (routeID == null) {
+    <h1 class="display-5 text-center">Unos odeljenja</h1>
+}
+@else {
+    <h1 class="display-5 text-center">Izmena odeljenja</h1>
+}
+
+
+<div  class="mt-5 border border-dark rounded-3 p-3">
+
+    <!-- Reaktivna forma za unos novog razreda ili izmenu, selectovi su stavke iz sifrarnika -->
+    <form [formGroup]="dodajOdeljenjeForma" (ngSubmit)="dodajOdeljenje()">
+        <div class="row">
+            <div class="col-md-6">
+
+                <!-- Prikazuje se samo ako je ruta za izmenu -->
+                @if (routeID != null) {
+                    <label for="id" class="form-label">ID:</label>
+                    <input id="id" type="text" class="form-control" formControlName="id">
+                }
+
+                <label for="skolskaGodina" class="form-label mt-3">Školska godina:</label>
+                <input id="skolskaGodina" formControlName="skolskaGodina" type="text" class="form-control">
+
+                <label for="razred" class="form-label mt-3">Razred:</label>
+                <input id="razred" formControlName="razred" type="text" class="form-control">
+
+                <label for="nazivOdeljenja" class="form-label mt-3">Naziv odeljenja:</label>
+                <input id="nazivOdeljenja" type="text" class="form-control" formControlName="nazivOdeljenja">
+            </div>
+
+            <div class="col-md-6">
+
+                <label for="program" class="form-label mt-3">Program:</label>
+                <input id="program" formControlName="program" type="text" class="form-control">
+
+                <label for="vrstaOdeljenja" class="form-label mt-3">Vrsta odeljenja:</label>
+                <select id="vrstaOdeljenja" formControlName="vrstaOdeljenja" class="form-control"> 
+                    @for(vrstaOdeljenja of vrsteOdeljenja; track $index) {
+                        <option [value]="vrstaOdeljenja.id">{{vrstaOdeljenja.naziv}}</option>
+                    }
+                </select>
+
+                <label class="form-check-label mt-5 me-5">Smena:</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="smena" id="prvaSmena" value="prva">
+                    <label class="form-check-label" for="prvaSmena">1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="smena" id="drugaSmena" value="druga">
+                    <label class="form-check-label" for="drugaSmena">2</label>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-3">
+            <input type="submit" class="btn btn-lg btn-dark w-25" [value]="(routeID == null) ? 'Dodaj' : 'Izmeni'">
+        </div>
+    </form>
+
+</div>
+
+
+

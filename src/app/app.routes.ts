@@ -12,21 +12,22 @@ export const routes: Routes = [ {
         path: 'odeljenja',
         component: PregledOdeljenjeComponent
     }, {
-        path: 'dodajodeljenje',
+        path: 'dodajOdeljenje',
         component: DodajOdeljenjeComponent
     }, {
         path: 'razredi',
         component: PregledRazredComponent
     }, {
-        path: 'dodajrazred',
+        path: 'dodajRazred',
         component: DodajRazredComponent
-    },
-    {
+    }, {
         path: 'izmeniRazred/:id',
         component: DodajRazredComponent
-    },
-    {
+    }, {
         path: 'izmeniOdeljenje/:id',
+        component: DodajOdeljenjeComponent
+    }, {
+        path: 'dodajOdeljenje/:razredID',
         component: DodajOdeljenjeComponent
     }
 ];
