@@ -1,5 +1,5 @@
 export interface BrojUcenika {
-    skolskaGodina: string,
+    skolskaGodinaId: number,
     brojUcenika: number,
     brojUcenica: number
 }

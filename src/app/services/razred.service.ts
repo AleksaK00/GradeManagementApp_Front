@@ -20,7 +20,7 @@ export class RazredService {
     }
 
     getBrojUcenika(): Observable<BrojUcenikaResponse> {
-        return this.httpClient.get<BrojUcenikaResponse>("https://dummyjson.com/c/5e5e-0141-4729-b922");
+        return this.httpClient.get<BrojUcenikaResponse>("https://dummyjson.com/c/8b8c-9fce-41b0-ac0a");
     }
 
     //za programe https://dummyjson.com/c/209c-0ef3-4ed8-aaee

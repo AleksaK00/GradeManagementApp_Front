@@ -1,4 +1,4 @@
-import { Component, computed, Input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 
 @Component({
   selector: 'app-prikaz-broj-ucenika',
@@ -8,7 +8,7 @@ import { Component, computed, Input } from '@angular/core';
 })
 export class PrikazBrojUcenikaComponent {
 
-    @Input() brojUcenika: number = 0;
-    @Input() brojUcenica: number = 0;
-    ukupnoUcenika = computed(() => this.brojUcenica + this.brojUcenika);
+    brojUcenika = input<number>(0);
+    brojUcenica = input<number>(0);
+    ukupnoUcenika = computed(() => this.brojUcenica() + this.brojUcenika());
 }

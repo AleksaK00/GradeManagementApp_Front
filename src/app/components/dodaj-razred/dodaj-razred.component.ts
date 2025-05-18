@@ -41,10 +41,12 @@ export class DodajRazredComponent implements OnInit{
             this.dodajRazredForma.get('id')?.disable();
             //pozovi API da dohvati razred sa datim id-om
         }
-        this.azurirajBrojUcenika('2023/2024');
+        this.azurirajBrojUcenika(1);
 
         this.dodajRazredForma.get('skolskaGodina')?.valueChanges.subscribe(skolskaGodina => {
             this.azurirajBrojUcenika(skolskaGodina);
+            console.log(skolskaGodina);
+            console.log(this.brojUcenika);
         })
     }
 
@@ -80,9 +82,10 @@ export class DodajRazredComponent implements OnInit{
         });
     }
 
-    azurirajBrojUcenika(godina: string) {
+    azurirajBrojUcenika(skolskaGodinaId: number) {
         this.razredService.getBrojUcenika().subscribe((rezultat: BrojUcenikaResponse) => {
-            this.brojUcenika = rezultat.data.find(godiste => godiste.skolskaGodina == godina);
+            this.brojUcenika = rezultat.data.find(godiste => godiste.skolskaGodinaId == skolskaGodinaId);
+            console.log(rezultat);
         })
     }
 }
