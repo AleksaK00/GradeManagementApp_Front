@@ -19,4 +19,8 @@ export class OdeljenjeService {
         return this.httpClient.get<StavkaSifrarnikaResponse>("https://dummyjson.com/c/c340-7ed4-439b-97a3");
     }
 
+    getAllNastavniJezici(): Observable<StavkaSifrarnikaResponse> {
+        return this.httpClient.get<StavkaSifrarnikaResponse>("https://dummyjson.com/c/ba61-2d84-453a-8984");
+    } 
+
 }

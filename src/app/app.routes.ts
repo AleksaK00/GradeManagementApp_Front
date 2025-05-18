@@ -12,9 +12,6 @@ export const routes: Routes = [ {
         path: 'odeljenja',
         component: PregledOdeljenjeComponent
     }, {
-        path: 'dodajOdeljenje',
-        component: DodajOdeljenjeComponent
-    }, {
         path: 'razredi',
         component: PregledRazredComponent
     }, {

@@ -1,7 +1,7 @@
-import { Observable } from "rxjs";
 import { SifrarnikStavka } from "./sifrarnik-stavka";
 import { Razred } from "./razred";
 import { Odeljenje } from "./odeljenje";
+import { BrojUcenika } from "./broj-ucenika";
 
 export interface APIresponse {
     response: string,
@@ -24,4 +24,8 @@ export interface OdeljenjeResponse extends APIresponse {
 
 export interface StavkaSifrarnikaResponse extends APIresponse {
     data: SifrarnikStavka[]
+}
+
+export interface BrojUcenikaResponse extends APIresponse {
+    data: BrojUcenika[]
 }

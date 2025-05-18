@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RazredResponse, SifrarnikStavkaResponse } from '../models/apiresponse';
+import { BrojUcenikaResponse, RazredResponse, SifrarnikStavkaResponse } from '../models/apiresponse';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,10 @@ export class RazredService {
 
     getAllRazredi(): Observable<RazredResponse> {
         return this.httpClient.get<RazredResponse>("https://dummyjson.com/c/9cfd-8c5d-43ea-8bb4");
+    }
+
+    getBrojUcenika(): Observable<BrojUcenikaResponse> {
+        return this.httpClient.get<BrojUcenikaResponse>("https://dummyjson.com/c/5e5e-0141-4729-b922");
     }
 
     //za programe https://dummyjson.com/c/209c-0ef3-4ed8-aaee

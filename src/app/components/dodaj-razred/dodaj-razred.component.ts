@@ -2,12 +2,14 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RazredService } from '../../services/razred.service';
 import { SifrarnikStavka } from '../../models/sifrarnik-stavka';
-import { SifrarnikStavkaResponse } from '../../models/apiresponse';
+import { BrojUcenikaResponse, SifrarnikStavkaResponse } from '../../models/apiresponse';
 import { ActivatedRoute } from '@angular/router';
+import { PrikazBrojUcenikaComponent } from "../../shared/prikaz-broj-ucenika/prikaz-broj-ucenika.component";
+import { BrojUcenika } from '../../models/broj-ucenika';
 
 @Component({
   selector: 'app-dodaj-razred',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, PrikazBrojUcenikaComponent],
   templateUrl: './dodaj-razred.component.html',
   styleUrl: './dodaj-razred.component.css'
 })
@@ -19,6 +21,7 @@ export class DodajRazredComponent implements OnInit{
     razredi: SifrarnikStavka[] = [];
     programi: SifrarnikStavka[] = [];
     routeID: string | null = null;
+    brojUcenika: BrojUcenika | undefined;
 
     //Reactive form za unos novog razreda
     dodajRazredForma: FormGroup = new FormGroup({
@@ -38,6 +41,11 @@ export class DodajRazredComponent implements OnInit{
             this.dodajRazredForma.get('id')?.disable();
             //pozovi API da dohvati razred sa datim id-om
         }
+        this.azurirajBrojUcenika('2023/2024');
+
+        this.dodajRazredForma.get('skolskaGodina')?.valueChanges.subscribe(skolskaGodina => {
+            this.azurirajBrojUcenika(skolskaGodina);
+        })
     }
 
     //Metoda koja poziva API da doda prosledjeni razred u bazu podataka
@@ -72,4 +80,9 @@ export class DodajRazredComponent implements OnInit{
         });
     }
 
+    azurirajBrojUcenika(godina: string) {
+        this.razredService.getBrojUcenika().subscribe((rezultat: BrojUcenikaResponse) => {
+            this.brojUcenika = rezultat.data.find(godiste => godiste.skolskaGodina == godina);
+        })
+    }
 }
