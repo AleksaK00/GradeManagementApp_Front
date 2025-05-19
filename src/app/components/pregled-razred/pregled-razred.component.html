@@ -23,17 +23,17 @@
         </tr>
     </thead>
     <tbody>
-        @for(razred of razredi; track $index) {
-            @if (razred.skolskaGodina == filterValue || filterValue == "") {
+        @for(razredRed of razredi; track $index) {
+            @if (razredRed.razred.skolskaGodina.naziv == filterValue || filterValue == "") {
                 <tr>
-                <td>{{razred.skolskaGodina}}</td>
-                <td>{{razred.razred}}</td>
-                <td>{{razred.program}}</td>
-                <td>{{razred.brojOdeljenja}}</td>
-                <td>{{razred.ukupnoUcenika}}</td>
-                <td><a [routerLink]="['/izmeniRazred', razred.id]" class="btn btn-sm btn-success">Izmeni</a></td>
-                <td><a class="btn btn-sm btn-danger" (click)="obrisiRazred(razred.id)">Obriši</a></td>
-                <td><a [routerLink]="['/dodajOdeljenje', razred.id]" class="btn btn-sm btn-info">Dodaj odeljenje</a></td>
+                <td>{{razredRed.razred.skolskaGodina.naziv}}</td>
+                <td>{{razredRed.razred.razredSifrarnik.naziv}}</td>
+                <td>{{razredRed.razred.program.naziv}}</td>
+                <td>{{razredRed.brojOdeljenja}}</td>
+                <td>{{razredRed.ukupnoUcenika}}</td>
+                <td><a [routerLink]="['/izmeniRazred', razredRed.razred.id]" class="btn btn-sm btn-success">Izmeni</a></td>
+                <td><a class="btn btn-sm btn-danger" (click)="obrisiRazred(razredRed.razred.id)">Obriši</a></td>
+                <td><a [routerLink]="['/dodajOdeljenje', razredRed.razred.id]" class="btn btn-sm btn-info">Dodaj odeljenje</a></td>
              </tr>
             }
         }    

@@ -1,7 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Razred } from '../../models/razred';
+import { Razred, RazredTabela } from '../../models/razred';
 import { RazredService } from '../../services/razred.service';
-import { RazredResponse } from '../../models/apiresponse';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
@@ -13,7 +12,7 @@ import { RouterLink } from '@angular/router';
 })
 export class PregledRazredComponent implements OnInit{
 
-    razredi: Razred[] = [];
+    razredi: RazredTabela[] = [];
     razredService = inject(RazredService);
     filterValue: string = "";
     filterSelect: FormControl = new FormControl("");
@@ -23,8 +22,8 @@ export class PregledRazredComponent implements OnInit{
     }
 
     UcitajRazrede() {
-        this.razredService.getAllRazredi().subscribe((rezultat: RazredResponse) => {
-            this.razredi = rezultat.data;
+        this.razredService.getAllRazredi().subscribe((rezultat: RazredTabela[]) => {
+            this.razredi = rezultat;
         });
     }
 

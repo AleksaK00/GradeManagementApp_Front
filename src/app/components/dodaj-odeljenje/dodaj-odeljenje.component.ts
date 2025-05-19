@@ -79,17 +79,17 @@ export class DodajOdeljenjeComponent implements OnInit{
         this.dodajOdeljenjeForma.get('razredId')?.disable();
 
         //Privremeno koristi dummyjson sa svim razredima, promeniti u odgovarajuci API call koji hvata samo jedan razred!!!!!!!!!!!!!!!!!!
-        this.razredService.getAllRazredi().subscribe((rezultat: RazredResponse) => {
-            this.razred = rezultat.data.find(r => r.id.toString() == this.razredID)
+        // this.razredService.getAllRazredi().subscribe((rezultat: RazredResponse) => {
+        //     this.razred = rezultat.data.find(r => r.id.toString() == this.razredID)
 
-            this.dodajOdeljenjeForma.get('razred')?.setValue(this.razred?.razred);
-            this.dodajOdeljenjeForma.get('skolskaGodina')?.setValue(this.razred?.skolskaGodina);
-            this.dodajOdeljenjeForma.get('program')?.setValue(this.razred?.program);
+        //     this.dodajOdeljenjeForma.get('razred')?.setValue(this.razred?.razred);
+        //     this.dodajOdeljenjeForma.get('skolskaGodina')?.setValue(this.razred?.skolskaGodina);
+        //     this.dodajOdeljenjeForma.get('program')?.setValue(this.razred?.program);
 
-            this.dodajOdeljenjeForma.get('razred')?.disable();
-            this.dodajOdeljenjeForma.get('skolskaGodina')?.disable();
-            this.dodajOdeljenjeForma.get('program')?.disable();
-        })   
+        //     this.dodajOdeljenjeForma.get('razred')?.disable();
+        //     this.dodajOdeljenjeForma.get('skolskaGodina')?.disable();
+        //     this.dodajOdeljenjeForma.get('program')?.disable();
+        // })   
     }
 
     //Metoda za popunjavanje forme informacijama potrebnim za izmenu
