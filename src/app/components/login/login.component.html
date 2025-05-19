@@ -1,0 +1,19 @@
+<h1 class="display-4 text-center mt-5">Prijava</h1>
+
+<form class="mt-5" [formGroup]="loginForma" (submit)="loginFormaSubmit()">
+  <!-- Email input -->
+  <div data-mdb-input-init class="form-outline mb-4">
+    <input type="email" id="email" class="form-control" formControlName="email"/>
+    <label class="form-label" for="email">Email</label>
+  </div>
+
+  <!-- Password input -->
+  <div data-mdb-input-init class="form-outline mb-4">
+    <input type="password" id="sifra" class="form-control" formControlName="sifra"/>
+    <label class="form-label" for="sifra">Lozinka</label>
+  </div>
+
+  <!-- Submit button -->
+  <input type="submit" class="btn btn-dark btn-block mb-4" value="Prijavi se">
+
+</form>
