@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BrojUcenikaResponse, RazredResponse, SifrarnikStavkaResponse } from '../models/apiresponse';
-import { Razred, RazredTabela } from '../models/razred';
+import { RazredTabela } from '../models/razred';
+import { environment } from '../../environments/environment.development';
+import { SifrarnikStavka } from '../models/sifrarnik-stavka';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +14,20 @@ export class RazredService {
     private httpClient = inject(HttpClient);
     constructor() { }
 
-    getRazredFormaInformacije() : Observable<SifrarnikStavkaResponse> {
-        return this.httpClient.get<SifrarnikStavkaResponse>("https://dummyjson.com/c/c908-74bf-4e7b-b0ef");
+    getAllSkolskeGodine() : Observable<SifrarnikStavka[]> {
+        return this.httpClient.get<SifrarnikStavka[]>(environment.API_URL + "sifrarnikstavka/Školska_godina");
+    }
+
+    getAllProgrami() : Observable<SifrarnikStavka[]> {
+        return this.httpClient.get<SifrarnikStavka[]>(environment.API_URL + "sifrarnikstavka/Program");
+    }
+
+    getAllSifrarnikRazredi() : Observable<SifrarnikStavka[]> {
+        return this.httpClient.get<SifrarnikStavka[]>(environment.API_URL + "sifrarnikstavka/Razred");
     }
 
     getAllRazredi(): Observable<RazredTabela[]> {
-        return this.httpClient.get<RazredTabela[]>("https://localhost:7141/api/razred");
+        return this.httpClient.get<RazredTabela[]>(environment.API_URL + "razred");
     }
 
     getBrojUcenika(): Observable<BrojUcenikaResponse> {

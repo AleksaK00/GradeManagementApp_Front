@@ -41,8 +41,9 @@ export class DodajRazredComponent implements OnInit{
             this.dodajRazredForma.get('id')?.disable();
             //pozovi API da dohvati razred sa datim id-om
         }
-        this.azurirajBrojUcenika(1);
 
+        //Subscribe na promenu select-a skolske godine, sto menja prikaz broja ucenika
+        this.azurirajBrojUcenika(1);
         this.dodajRazredForma.get('skolskaGodina')?.valueChanges.subscribe(skolskaGodina => {
             this.azurirajBrojUcenika(skolskaGodina);
             console.log(skolskaGodina);
@@ -66,22 +67,24 @@ export class DodajRazredComponent implements OnInit{
 
     //Metoda za popunjavanje select elemenata informacijama iz sifrarnika i postavljanje default vrednosti select-a
     popuniSelectForme() {
-        this.razredService.getRazredFormaInformacije().subscribe((rezultat: SifrarnikStavkaResponse) => {
-            if (rezultat.response == 'ok') {
-                this.skolskeGodine = rezultat.skolskaGodina;
-                this.razredi = rezultat.razred;
-                this.programi = rezultat.program;
 
-                this.dodajRazredForma.get('skolskaGodina')?.setValue(this.skolskeGodine[0].id);
-                this.dodajRazredForma.get('razred')?.setValue(this.razredi[0].id);
-                this.dodajRazredForma.get('program')?.setValue(this.programi[0].id);
-            }
-            else {
-                alert("Server Error");
-            }
+        this.razredService.getAllSkolskeGodine().subscribe((rezultat: SifrarnikStavka[]) => {
+            this.skolskeGodine = rezultat;
+            this.dodajRazredForma.get('skolskaGodina')?.setValue(rezultat[0].id);
+        });
+
+        this.razredService.getAllProgrami().subscribe((rezultat: SifrarnikStavka[]) => {
+            this.programi = rezultat;
+            this.dodajRazredForma.get('program')?.setValue(rezultat[0].id);
+        });
+
+        this.razredService.getAllSifrarnikRazredi().subscribe((rezultat: SifrarnikStavka[]) => {
+            this.razredi = rezultat;
+            this.dodajRazredForma.get('razred')?.setValue(rezultat[0].id);
         });
     }
 
+    //Metoda azurira prikaz ukupnog broja ucenika na izabranu skolsku godinu
     azurirajBrojUcenika(skolskaGodinaId: number) {
         this.razredService.getBrojUcenika().subscribe((rezultat: BrojUcenikaResponse) => {
             this.brojUcenika = rezultat.data.find(godiste => godiste.skolskaGodinaId == skolskaGodinaId);
