@@ -3,6 +3,7 @@ import { Razred, RazredTabela } from '../../models/razred';
 import { RazredService } from '../../services/razred.service';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { SifrarnikStavka } from '../../models/sifrarnik-stavka';
 
 @Component({
   selector: 'app-pregled-razred',
@@ -16,14 +17,22 @@ export class PregledRazredComponent implements OnInit{
     razredService = inject(RazredService);
     filterValue: string = "";
     filterSelect: FormControl = new FormControl("");
+    skolskeGodine: SifrarnikStavka[] = []
 
     ngOnInit(): void {
         this.UcitajRazrede();
+        this.UcitajSkolskeGodine();
     }
 
     UcitajRazrede() {
         this.razredService.getAllRazredi().subscribe((rezultat: RazredTabela[]) => {
             this.razredi = rezultat;
+        });
+    }
+
+    UcitajSkolskeGodine() {
+        this.razredService.getAllSkolskeGodine().subscribe((rezultat: SifrarnikStavka[]) => {
+            this.skolskeGodine = rezultat;
         });
     }
 

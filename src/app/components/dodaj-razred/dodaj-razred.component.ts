@@ -2,10 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RazredService } from '../../services/razred.service';
 import { SifrarnikStavka } from '../../models/sifrarnik-stavka';
-import { BrojUcenikaResponse, SifrarnikStavkaResponse } from '../../models/apiresponse';
-import { ActivatedRoute } from '@angular/router';
+import { BrojUcenikaResponse, PostResponse, SifrarnikStavkaResponse } from '../../models/apiresponse';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PrikazBrojUcenikaComponent } from "../../shared/prikaz-broj-ucenika/prikaz-broj-ucenika.component";
 import { BrojUcenika } from '../../models/broj-ucenika';
+import { Razred } from '../../models/razred';
 
 @Component({
   selector: 'app-dodaj-razred',
@@ -17,8 +18,10 @@ export class DodajRazredComponent implements OnInit{
 
     razredService = inject(RazredService);
     route = inject(ActivatedRoute);
+    router = inject(Router);
     skolskeGodine: SifrarnikStavka[] = [];
     razredi: SifrarnikStavka[] = [];
+    razred: Razred | null = null;
     programi: SifrarnikStavka[] = [];
     routeID: string | null = null;
     brojUcenika: BrojUcenika | undefined;
@@ -39,7 +42,7 @@ export class DodajRazredComponent implements OnInit{
         if (this.routeID != null) {
             this.dodajRazredForma.get('id')?.setValue(this.routeID);
             this.dodajRazredForma.get('id')?.disable();
-            //pozovi API da dohvati razred sa datim id-om
+            this.inicijalizujEditFormu(Number(this.routeID))
         }
 
         //Subscribe na promenu select-a skolske godine, sto menja prikaz broja ucenika
@@ -56,12 +59,20 @@ export class DodajRazredComponent implements OnInit{
         const formValue = this.dodajRazredForma.value;
         
         if (this.dodajRazredForma.get('id')?.value == null) {
-            console.log(this.dodajRazredForma.value);
-            //dodaj novi razred
+            this.razredService.addRazred(this.dodajRazredForma).subscribe({
+                next: (rezultat) => alert(rezultat.message),
+                error: (greska) => alert(greska.error?.message || "Unexpected error")  
+            });
         }
         else {
-            console.log(this.dodajRazredForma.value);
-            //Azuriraj postojeci razred sa datim id-om
+            this.razredService.editRazred(this.dodajRazredForma).subscribe({
+                next: (rezultat) => {
+                    alert(rezultat.message);
+                    this.router.navigateByUrl('/razredi');
+                },
+                error: (greska) => alert(greska.error?.message)
+            })
+            
         }
     }
 
@@ -90,5 +101,22 @@ export class DodajRazredComponent implements OnInit{
             this.brojUcenika = rezultat.data.find(godiste => godiste.skolskaGodinaId == skolskaGodinaId);
             console.log(rezultat);
         })
+    }
+
+    //Metoda postavlja select forme na podatke sa razreda ako je edit forma
+    inicijalizujEditFormu(id: number) {
+        this.razredService.getRazred(id).subscribe({
+            next: (rezultat: Razred) => {
+                this.razred = rezultat;
+
+                this.dodajRazredForma.get('skolskaGodina')?.setValue(rezultat.skolskaGodina.id);
+                this.dodajRazredForma.get('razred')?.setValue(rezultat.razredSifrarnik.id);
+                this.dodajRazredForma.get('program')?.setValue(rezultat.program.id);
+            },
+            error: (greska) => {
+                alert(greska.error?.message)
+                this.router.navigateByUrl('/');
+            }
+        });
     }
 }

@@ -8,6 +8,10 @@ export interface APIresponse {
     message: string,
 }
 
+export interface PostResponse {
+    message: string
+}
+
 export interface SifrarnikStavkaResponse extends APIresponse {
     skolskaGodina: SifrarnikStavka[],
     razred: SifrarnikStavka[],

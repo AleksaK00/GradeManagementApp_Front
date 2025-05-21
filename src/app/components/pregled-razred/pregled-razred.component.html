@@ -2,9 +2,9 @@
     <div class="col-md-3">
         <select class="form-control" [(ngModel)]="filterValue">
             <option value="">Školska godina</option>
-            <option value="2023/2024">2023/2024</option>
-            <option value="2024/2025">2024/2025</option>
-            <option value="2025/2026">2025/2026</option>
+            @for(skolskaGodina of skolskeGodine; track $index) {
+                <option [value]="skolskaGodina.naziv">{{skolskaGodina.naziv}}</option>
+            }
         </select>
     </div>
 </div>
