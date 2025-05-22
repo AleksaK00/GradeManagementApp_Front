@@ -1,9 +1,11 @@
+import { SifrarnikStavka } from "./sifrarnik-stavka";
+
 export interface Odeljenje {
     id: number,
-    nazivOdeljenja: string,
+    naziv: string,
     odeljenskiStaresina: string,
-    ukupnoUcenika: number,
-    izdvojenoOdeljenje: string,
-    jezikNastave: string,
-    lokacija: string
+    ukupanBrojUcenika: number,
+    izdvojenoOdeljenje: boolean,
+    jezikNastave: SifrarnikStavka,
+    vrstaOdeljenja: SifrarnikStavka
 }

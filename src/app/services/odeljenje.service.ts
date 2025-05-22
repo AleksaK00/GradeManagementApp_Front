@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { OdeljenjeResponse, SifrarnikStavkaResponse, StavkaSifrarnikaResponse } from '../models/apiresponse';
+import { OdeljenjeResponse, PostResponse, SifrarnikStavkaResponse, StavkaSifrarnikaResponse } from '../models/apiresponse';
+import { Odeljenje } from '../models/odeljenje';
+import { environment } from '../../environments/environment.development';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +14,12 @@ export class OdeljenjeService {
     private httpClient = inject(HttpClient);
     constructor() { }
 
-    getAllOdeljenja() : Observable<OdeljenjeResponse> {
-        return this.httpClient.get<OdeljenjeResponse>("https://dummyjson.com/c/2c8d-c2f6-41d7-92c3");
+    getAllOdeljenja() : Observable<Odeljenje[]> {
+        return this.httpClient.get<Odeljenje[]>(environment.API_URL + "odeljenje");
+    }
+
+    addOdeljenje(novoOdeljenje: FormGroup): Observable<PostResponse> {
+        return this.httpClient.post<PostResponse>(environment.API_URL + "odeljenje/dodaj", novoOdeljenje.getRawValue());
     }
 
     getVrsteOdeljenja(): Observable<StavkaSifrarnikaResponse> {

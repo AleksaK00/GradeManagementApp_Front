@@ -97,11 +97,11 @@ export class DodajOdeljenjeComponent implements OnInit{
         this.dodajOdeljenjeForma.get('id')?.disable();
 
         //Privremeno koristi dummyjson sa svim odeljenjima, promeniti u odgovarajuci API call koji hvata samo jedan razred!!!!!!!!!!!!!!!!!!
-        this.odeljenjeService.getAllOdeljenja().subscribe((rezultat: OdeljenjeResponse) => {
-            this.odeljenje = rezultat.data.find(o => o.id.toString() == this.routeID)
+        this.odeljenjeService.getAllOdeljenja().subscribe((rezultat: Odeljenje[]) => {
+            this.odeljenje = rezultat.find(o => o.id.toString() == this.routeID)
 
-            this.dodajOdeljenjeForma.get('razred')?.setValue(this.odeljenje?.nazivOdeljenja);
-            this.dodajOdeljenjeForma.get('skolskaGodina')?.setValue(this.odeljenje?.lokacija);
+            this.dodajOdeljenjeForma.get('razred')?.setValue(this.odeljenje?.naziv);
+            this.dodajOdeljenjeForma.get('skolskaGodina')?.setValue(this.odeljenje?.vrstaOdeljenja.naziv);
             this.dodajOdeljenjeForma.get('program')?.setValue(this.odeljenje?.izdvojenoOdeljenje);
 
             this.dodajOdeljenjeForma.get('razred')?.disable();
@@ -112,8 +112,10 @@ export class DodajOdeljenjeComponent implements OnInit{
 
     //Metoda koja radi submit forme
     dodajOdeljenje() {
-        console.log(this.dodajOdeljenjeForma.value);
-        //Post API call
+        this.odeljenjeService.addOdeljenje(this.dodajOdeljenjeForma).subscribe({
+            next: (rezultat) => alert(rezultat.message),
+            error: (greska) => alert(greska.error?.message)
+        })
     }
 
     //Metoda vrsi povezivanje opcionih inputa sa checboxom

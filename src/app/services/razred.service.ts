@@ -39,6 +39,10 @@ export class RazredService {
         return this.httpClient.put<PostResponse>(environment.API_URL + "razred/izmeni/" + noviRazred.get('id')?.value, noviRazred.value);
     }
 
+    deleteRazred(id: number): Observable<PostResponse> {
+        return this.httpClient.delete<PostResponse>(environment.API_URL + "razred/obrisi/" + id);
+    }
+
     getAllRazredi(): Observable<RazredTabela[]> {
         return this.httpClient.get<RazredTabela[]>(environment.API_URL + "razred");
     }

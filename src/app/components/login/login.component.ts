@@ -20,13 +20,18 @@ export class LoginComponent {
     })
 
     loginFormaSubmit() {
-        if (this.loginForma.get('email')?.value == 'admin@gmail.com' && this.loginForma.get('sifra')?.value == 'Sifra123') {
-            localStorage.setItem('korisnik', this.loginForma.get('email')?.value);
-            this.autentifikacijaServis.setUlogovan(true);
-            this.router.navigateByUrl('/');
+        if (this.loginForma.valid) {
+            this.autentifikacijaServis.login(this.loginForma).subscribe({
+                next: (rezultat) => {
+                    localStorage.setItem('korisnik', rezultat.message);
+                    this.autentifikacijaServis.setUlogovan(true);
+                    this.router.navigateByUrl('/');
+                },
+                error: (greska) => alert(greska.error?.message)
+            });
         }
         else {
-            alert('Email ili lozinka je pogrešna');
+            alert("Sva polja su obavezna, sifra minimum 8 slova")
         }
     }
 

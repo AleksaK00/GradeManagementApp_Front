@@ -37,8 +37,10 @@ export class PregledRazredComponent implements OnInit{
     }
 
     obrisiRazred(id: number) {
-        confirm('Potvrdi brisanje razreda');
-        alert('BOOM');
+        this.razredService.deleteRazred(id).subscribe({
+            next: (rezultat) => alert(rezultat.message),
+            error: (greska) => alert(greska.error?.message)
+        })
     }
 
 }

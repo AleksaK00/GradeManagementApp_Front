@@ -6,7 +6,7 @@
             <th>Ukupno učenika</th>
             <th>Izdvojeno odeljenje</th>
             <th>Jezik nastave</th>
-            <th>Lokacija</th>
+            <th>Vrsta Odeljenja</th>
             <th>Pregled/izmena</th>
             <th>Obriši</th>
         </tr>
@@ -14,12 +14,12 @@
     <tbody>
         @for(odeljenje of odeljenja; track $index) {
             <tr>
-                <td>{{odeljenje.nazivOdeljenja}}</td>
+                <td>{{odeljenje.naziv}}</td>
                 <td>{{odeljenje.odeljenskiStaresina}}</td>
-                <td>{{odeljenje.ukupnoUcenika}}</td>
-                <td>{{odeljenje.izdvojenoOdeljenje}}</td>
-                <td>{{odeljenje.jezikNastave}}</td>
-                <td>{{odeljenje.lokacija}}</td>
+                <td>{{odeljenje.ukupanBrojUcenika}}</td>
+                <td>{{odeljenje.izdvojenoOdeljenje ? "Da" : "Ne"}}</td>
+                <td>{{odeljenje.jezikNastave.naziv}}</td>
+                <td>{{odeljenje.vrstaOdeljenja.naziv}}</td>
                 <td><a [routerLink]="['/izmeniOdeljenje', odeljenje.id]" class="btn btn-sm btn-success">Izmeni</a></td>
                 <td><a class="btn btn-sm btn-danger">Obriši</a></td>
             </tr>

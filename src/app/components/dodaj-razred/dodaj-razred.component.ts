@@ -54,10 +54,8 @@ export class DodajRazredComponent implements OnInit{
         })
     }
 
-    //Metoda koja poziva API da doda prosledjeni razred u bazu podataka
+    //Metoda koja poziva API da doda prosledjeni razred u bazu podataka ili updejtuje
     dodajRazredSubmit() {
-        const formValue = this.dodajRazredForma.value;
-        
         if (this.dodajRazredForma.get('id')?.value == null) {
             this.razredService.addRazred(this.dodajRazredForma).subscribe({
                 next: (rezultat) => alert(rezultat.message),
@@ -70,9 +68,8 @@ export class DodajRazredComponent implements OnInit{
                     alert(rezultat.message);
                     this.router.navigateByUrl('/razredi');
                 },
-                error: (greska) => alert(greska.error?.message)
-            })
-            
+                error: (greska) => alert(greska.error?.message  || "Unexpected error")
+            })   
         }
     }
 

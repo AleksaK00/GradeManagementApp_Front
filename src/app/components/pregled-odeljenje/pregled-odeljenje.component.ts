@@ -1,7 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Odeljenje } from '../../models/odeljenje';
 import { OdeljenjeService } from '../../services/odeljenje.service';
-import { OdeljenjeResponse } from '../../models/apiresponse';
 import { RouterLink} from '@angular/router';
 
 @Component({
@@ -16,8 +15,9 @@ export class PregledOdeljenjeComponent implements OnInit{
     odeljenjeService = inject(OdeljenjeService);
 
     ngOnInit(): void {
-        this.odeljenjeService.getAllOdeljenja().subscribe((rezultat: OdeljenjeResponse) => {
-            this.odeljenja = rezultat.data;
+        this.odeljenjeService.getAllOdeljenja().subscribe({
+            next: (rezultat) => this.odeljenja = rezultat,
+            error: (greska) => alert(greska.error?.message)
         })
     }
 }
