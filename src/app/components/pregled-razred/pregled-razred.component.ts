@@ -13,6 +13,7 @@ import { SifrarnikStavka } from '../../models/sifrarnik-stavka';
 })
 export class PregledRazredComponent implements OnInit{
 
+    //Inicijalizacija varijabli i dependancy injection
     razredi: RazredTabela[] = [];
     razredService = inject(RazredService);
     filterValue: string = "";
@@ -24,18 +25,21 @@ export class PregledRazredComponent implements OnInit{
         this.UcitajSkolskeGodine();
     }
 
+    //Hvatanje svih razred iz baze podataka
     UcitajRazrede() {
         this.razredService.getAllRazredi().subscribe((rezultat: RazredTabela[]) => {
             this.razredi = rezultat;
         });
     }
 
+    //Hvatanje svih skolske godine iz baze podataka za filter
     UcitajSkolskeGodine() {
         this.razredService.getAllSkolskeGodine().subscribe((rezultat: SifrarnikStavka[]) => {
             this.skolskeGodine = rezultat;
         });
     }
 
+    //Metoda za brisanje razreda
     obrisiRazred(id: number) {
         this.razredService.deleteRazred(id).subscribe({
             next: (rezultat) => alert(rezultat.message),

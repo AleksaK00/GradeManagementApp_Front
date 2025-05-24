@@ -12,3 +12,8 @@ export interface RazredTabela {
     ukupnoUcenika: number,
     brojOdeljenja: number
 }
+
+export interface BrojUcenika {
+    brojUcenika: number,
+    brojUcenica: number,
+}

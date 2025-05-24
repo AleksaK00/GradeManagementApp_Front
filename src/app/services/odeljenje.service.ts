@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { OdeljenjeResponse, PostResponse, SifrarnikStavkaResponse, StavkaSifrarnikaResponse } from '../models/apiresponse';
-import { Odeljenje } from '../models/odeljenje';
+import { PostResponse } from '../models/apiresponse';
+import { Odeljenje, OdeljenjePuno } from '../models/odeljenje';
 import { environment } from '../../environments/environment.development';
 import { FormGroup } from '@angular/forms';
+import { SifrarnikStavka } from '../models/sifrarnik-stavka';
 
 @Injectable({
   providedIn: 'root'
@@ -18,16 +19,32 @@ export class OdeljenjeService {
         return this.httpClient.get<Odeljenje[]>(environment.API_URL + "odeljenje");
     }
 
+    getOdeljenjeById(id: number): Observable<OdeljenjePuno> {
+        return this.httpClient.get<OdeljenjePuno>(environment.API_URL + "odeljenje/" + id);
+    }
+
     addOdeljenje(novoOdeljenje: FormGroup): Observable<PostResponse> {
         return this.httpClient.post<PostResponse>(environment.API_URL + "odeljenje/dodaj", novoOdeljenje.getRawValue());
     }
 
-    getVrsteOdeljenja(): Observable<StavkaSifrarnikaResponse> {
-        return this.httpClient.get<StavkaSifrarnikaResponse>("https://dummyjson.com/c/c340-7ed4-439b-97a3");
+    updateOdeljenje(izmenjenoOdeljenje: FormGroup, id: number): Observable<PostResponse> {
+        return this.httpClient.put<PostResponse>(environment.API_URL + "odeljenje/izmeni/" + id, izmenjenoOdeljenje.getRawValue());
     }
 
-    getAllNastavniJezici(): Observable<StavkaSifrarnikaResponse> {
-        return this.httpClient.get<StavkaSifrarnikaResponse>("https://dummyjson.com/c/ba61-2d84-453a-8984");
+    deleteOdeljenje(id: number): Observable<PostResponse> {
+        return this.httpClient.delete<PostResponse>(environment.API_URL + "odeljenje/obrisi/" + id);
+    }
+
+    getVrsteOdeljenja(): Observable<SifrarnikStavka[]> {
+        return this.httpClient.get<SifrarnikStavka[]>(environment.API_URL + "sifrarnikstavka/Vrsta_odeljenja");
+    }
+
+    getNastavniJezici(): Observable<SifrarnikStavka[]> {
+        return this.httpClient.get<SifrarnikStavka[]>(environment.API_URL + "sifrarnikstavka/Jezik_nastave");
     } 
+
+    getStraniJezici(): Observable<SifrarnikStavka[]> {
+        return this.httpClient.get<SifrarnikStavka[]>(environment.API_URL + "sifrarnikstavka/Prvi_strani_jezik");
+    }
 
 }

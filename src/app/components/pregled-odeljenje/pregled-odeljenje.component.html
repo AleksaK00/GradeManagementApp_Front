@@ -21,7 +21,7 @@
                 <td>{{odeljenje.jezikNastave.naziv}}</td>
                 <td>{{odeljenje.vrstaOdeljenja.naziv}}</td>
                 <td><a [routerLink]="['/izmeniOdeljenje', odeljenje.id]" class="btn btn-sm btn-success">Izmeni</a></td>
-                <td><a class="btn btn-sm btn-danger">Obriši</a></td>
+                <td><a class="btn btn-sm btn-danger" (click)="obrisiOdeljenje(odeljenje.id)">Obriši</a></td>
             </tr>
         }    
     </tbody>

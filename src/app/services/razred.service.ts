@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BrojUcenikaResponse, PostResponse, RazredResponse, SifrarnikStavkaResponse } from '../models/apiresponse';
-import { Razred, RazredTabela } from '../models/razred';
+import { PostResponse } from '../models/apiresponse';
+import { BrojUcenika, Razred, RazredTabela } from '../models/razred';
 import { environment } from '../../environments/environment.development';
 import { SifrarnikStavka } from '../models/sifrarnik-stavka';
 import { FormGroup } from '@angular/forms';
@@ -47,9 +47,11 @@ export class RazredService {
         return this.httpClient.get<RazredTabela[]>(environment.API_URL + "razred");
     }
 
-    getBrojUcenika(): Observable<BrojUcenikaResponse> {
-        return this.httpClient.get<BrojUcenikaResponse>("https://dummyjson.com/c/8b8c-9fce-41b0-ac0a");
+    getBrojUcenikaUSkolskoj(idSkolskeGodine: number): Observable<BrojUcenika> {
+        return this.httpClient.get<BrojUcenika>(environment.API_URL + "razred/brojUcenikaSkolska/" + idSkolskeGodine);
     }
 
-    //za programe https://dummyjson.com/c/209c-0ef3-4ed8-aaee
+    getBrojUcenikaURazredu(idRazreda: number): Observable<BrojUcenika> {
+        return this.httpClient.get<BrojUcenika>(environment.API_URL + "razred/brojUcenikaRazred/" + idRazreda);
+    }
 }

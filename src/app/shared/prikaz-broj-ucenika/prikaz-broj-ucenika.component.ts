@@ -1,4 +1,5 @@
 import { Component, computed, input } from '@angular/core';
+import { BrojUcenika } from '../../models/razred';
 
 @Component({
   selector: 'app-prikaz-broj-ucenika',
@@ -8,7 +9,6 @@ import { Component, computed, input } from '@angular/core';
 })
 export class PrikazBrojUcenikaComponent {
 
-    brojUcenika = input<number>(0);
-    brojUcenica = input<number>(0);
-    ukupnoUcenika = computed(() => this.brojUcenica() + this.brojUcenika());
+    brojUcenika = input<BrojUcenika | null>(null);
+    ukupnoUcenika = computed(() => this.brojUcenika()?.brojUcenika! + this.brojUcenika()?.brojUcenica!);
 }

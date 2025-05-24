@@ -2,11 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RazredService } from '../../services/razred.service';
 import { SifrarnikStavka } from '../../models/sifrarnik-stavka';
-import { BrojUcenikaResponse, PostResponse, SifrarnikStavkaResponse } from '../../models/apiresponse';
+import { PostResponse } from '../../models/apiresponse';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PrikazBrojUcenikaComponent } from "../../shared/prikaz-broj-ucenika/prikaz-broj-ucenika.component";
-import { BrojUcenika } from '../../models/broj-ucenika';
-import { Razred } from '../../models/razred';
+import { BrojUcenika, Razred } from '../../models/razred';
 
 @Component({
   selector: 'app-dodaj-razred',
@@ -16,6 +15,7 @@ import { Razred } from '../../models/razred';
 })
 export class DodajRazredComponent implements OnInit{
 
+    //inicijalizacija varijabli i dependacy injection
     razredService = inject(RazredService);
     route = inject(ActivatedRoute);
     router = inject(Router);
@@ -24,7 +24,7 @@ export class DodajRazredComponent implements OnInit{
     razred: Razred | null = null;
     programi: SifrarnikStavka[] = [];
     routeID: string | null = null;
-    brojUcenika: BrojUcenika | undefined;
+    brojUcenika: BrojUcenika | null = null;
 
     //Reactive form za unos novog razreda
     dodajRazredForma: FormGroup = new FormGroup({
@@ -54,7 +54,7 @@ export class DodajRazredComponent implements OnInit{
         })
     }
 
-    //Metoda koja poziva API da doda prosledjeni razred u bazu podataka ili updejtuje
+    //Metoda koja poziva API za dodavanje ili editovanje razreda
     dodajRazredSubmit() {
         if (this.dodajRazredForma.get('id')?.value == null) {
             this.razredService.addRazred(this.dodajRazredForma).subscribe({
@@ -94,9 +94,8 @@ export class DodajRazredComponent implements OnInit{
 
     //Metoda azurira prikaz ukupnog broja ucenika na izabranu skolsku godinu
     azurirajBrojUcenika(skolskaGodinaId: number) {
-        this.razredService.getBrojUcenika().subscribe((rezultat: BrojUcenikaResponse) => {
-            this.brojUcenika = rezultat.data.find(godiste => godiste.skolskaGodinaId == skolskaGodinaId);
-            console.log(rezultat);
+        this.razredService.getBrojUcenikaUSkolskoj(skolskaGodinaId).subscribe((rezultat: BrojUcenika) => {
+            this.brojUcenika = rezultat;
         })
     }
 

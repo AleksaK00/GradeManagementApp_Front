@@ -8,7 +8,8 @@
 <div  class="mt-5 border border-dark rounded-3 p-3">
     
     <!-- Reaktivna forma za unos novog razreda ili izmenu, selectovi su stavke iz sifrarnika -->
-    <form [formGroup]="dodajOdeljenjeForma" (ngSubmit)="dodajOdeljenje()">
+    <form [formGroup]="dodajOdeljenjeForma" (ngSubmit)="odeljenjeSubmit()">
+        <!-- Red 1 -->
         <div class="row mb-1">
 
             <div class="col-md-4">  
@@ -34,6 +35,7 @@
             </div>
         </div>
         
+        <!-- Red 2 -->
         <div class="row mb-1">
             <div class="col-md-4">
                 <label for="skolskaGodina" class="form-label">Školska godina:</label>
@@ -55,6 +57,7 @@
             </div>
         </div>
         
+        <!-- Red 3 -->
         <div class="row mb-1">
 
             <div class="col-md-4">
@@ -84,6 +87,7 @@
             </div>
         </div>
         
+        <!-- Red 4 -->
         <div class="row mb-1">
             <div class="col-md-4">      
                 <label for="nazivOdeljenja" class="form-label">Naziv odeljenja:</label>
@@ -115,6 +119,7 @@
             </div>
         </div>
         
+        <!-- Red 5 -->
         <div class="row mb-1">
 
             <div class="col-md-4">      
@@ -140,6 +145,7 @@
             </div> 
         </div>
 
+        <!-- Red 6 -->
         <div class="row mb-1">
 
             <div class="col-md-4">
@@ -164,17 +170,17 @@
             </div>
 
             <div class="col-md-4">
-                <label for="prviStraniJezik" class="form-label">Vrsta odeljenja:</label>
+                <label for="prviStraniJezik" class="form-label">Prvi strani jezik:</label>
                 <select id="prviStraniJezik" formControlName="prviStraniJezik" class="form-control"> 
                     <option [value]="0">Prvi strani jezik</option>
-                    <!-- @for(vrstaOdeljenja of vrsteOdeljenja; track $index) {
-                        <option [value]="vrstaOdeljenja.id">{{vrstaOdeljenja.naziv}}</option>
-                    } -->
+                    @for(straniJezik of straniJezici; track $index) {
+                        <option [value]="straniJezik.id">{{straniJezik.naziv}}</option>
+                    }
                 </select>
             </div>
         </div>
         
-        
+        <!-- dodaj ili izmeni dugme u zavisnosti od rute -->
         <div class="row justify-content-center mt-3">
             <input type="submit" class="btn btn-lg btn-dark w-25" [value]="(routeID == null) ? 'Dodaj' : 'Izmeni'">
         </div>
@@ -182,7 +188,9 @@
     
 </div>
 
-<app-prikaz-broj-ucenika [brojUcenika]="3" [brojUcenica]="5"></app-prikaz-broj-ucenika>
+<!-- prikaz broja ucenika u razredu u koji se dodaje odeljejne -->
+<h3 class="fs-3 text-center mt-3">Trenutni broj učenika u razredu</h3>
+<app-prikaz-broj-ucenika [brojUcenika]="brojUcenika"></app-prikaz-broj-ucenika>
 
 
 

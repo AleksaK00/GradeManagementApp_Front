@@ -14,11 +14,13 @@ export class LoginComponent {
     router = inject(Router);
     autentifikacijaServis = inject(AutentifikacijaService);
 
+    //Reaktivna forma
     loginForma: FormGroup = new FormGroup({
         email: new FormControl<string>('', [Validators.required, Validators.email]),
         sifra: new FormControl<string>('', [Validators.required, Validators.min(8)])
     })
 
+    //Metoda koja vrsi API call za validaciju log in informacija
     loginFormaSubmit() {
         if (this.loginForma.valid) {
             this.autentifikacijaServis.login(this.loginForma).subscribe({
