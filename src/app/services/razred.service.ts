@@ -54,4 +54,8 @@ export class RazredService {
     getBrojUcenikaURazredu(idRazreda: number): Observable<BrojUcenika> {
         return this.httpClient.get<BrojUcenika>(environment.API_URL + "razred/brojUcenikaRazred/" + idRazreda);
     }
+
+    getExcelFile(): Observable<Blob> {
+        return this.httpClient.get(environment.API_URL + "razred/excel", { responseType: 'blob' });
+    }
 }

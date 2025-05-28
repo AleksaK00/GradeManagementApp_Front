@@ -1,3 +1,9 @@
+<div class="row text-center">
+    <div class="col">
+        <h2>Pregled Razreda</h2>
+    </div>
+</div>
+
 <div class="row my-5">
     <div class="col-md-3">
         <select class="form-control" [(ngModel)]="filterValue">
@@ -6,6 +12,11 @@
                 <option [value]="skolskaGodina.naziv">{{skolskaGodina.naziv}}</option>
             }
         </select>
+    </div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3">
+        <button class="btn btn-warning w-100" (click)="preuzmiExcel()">Preuzmi Razrede u Excel-u</button>
     </div>
 </div>
 

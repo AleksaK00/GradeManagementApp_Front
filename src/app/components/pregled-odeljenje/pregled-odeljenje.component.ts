@@ -37,6 +37,22 @@ export class PregledOdeljenjeComponent implements OnInit{
         else {
             return;
         }
- 
+    }
+
+    //Metoda za preuzimanje Excel fajla sa svim odeljenjima
+    preuzmiExcel() {
+        this.odeljenjeService.getExcelFile().subscribe({
+            next: (response) => {
+                const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+                const url = window.URL.createObjectURL(blob);
+                const pomocniElement = document.createElement('a');
+                pomocniElement.href = url;
+                pomocniElement.download = 'odeljenja.xlsx';
+                document.body.appendChild(pomocniElement);
+                pomocniElement.click();
+                document.body.removeChild(pomocniElement);
+            },
+            error: (greska) => alert(greska.error?.message)
+        });
     }
 }

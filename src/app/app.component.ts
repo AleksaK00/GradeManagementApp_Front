@@ -14,6 +14,7 @@ export class AppComponent{
     router = inject(Router);
     autentifikacijaServis = inject(AutentifikacijaService);
     ulogovan = this.autentifikacijaServis.getUlogovan();
+    ulogovanEmail = this.autentifikacijaServis.getUlogovanEmail();
     
     odjaviKorisnika() {
         localStorage.removeItem('korisnik');

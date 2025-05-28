@@ -24,6 +24,11 @@ export class AutentifikacijaService {
         return this.ulogovan;
     }
 
+    getUlogovanEmail(): string | null {
+        return localStorage.getItem('korisnik');
+    }
+
+
     login(korisnik: FormGroup ): Observable<PostResponse> {
         return this.httpClient.post<PostResponse>(environment.API_URL + "login", korisnik.value);
     }

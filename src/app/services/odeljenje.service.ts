@@ -47,4 +47,8 @@ export class OdeljenjeService {
         return this.httpClient.get<SifrarnikStavka[]>(environment.API_URL + "sifrarnikstavka/Prvi_strani_jezik");
     }
 
+    getExcelFile(): Observable<Blob> {
+        return this.httpClient.get(environment.API_URL + "odeljenje/excel", { responseType: 'blob' });
+    }
+
 }

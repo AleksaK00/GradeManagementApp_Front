@@ -124,7 +124,6 @@ export class DodajOdeljenjeComponent implements OnInit{
                 if (this.odeljenje.prviStraniJezik != null) {
                     this.dodajOdeljenjeForma.get('prviStraniJezik')?.setValue(this.odeljenje.prviStraniJezik.id);
                 }
-
                 this.dodajOdeljenjeForma.get('skolskaGodina')?.disable();
                 this.dodajOdeljenjeForma.get('razred')?.disable();
                 this.dodajOdeljenjeForma.get('program')?.disable();
